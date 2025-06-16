@@ -20,22 +20,22 @@ class AppWindow(QMainWindow):
         central_widget.setLayout(main_layout)
 
 
-        # Folder selection
-        folder_select_layout = QHBoxLayout()
+        # Input Folder selection
+        input_folder_select_layout = QHBoxLayout()
 
-        self.folder_select_label = QLabel("Selected Folder:")
-        folder_select_layout.addWidget(self.folder_select_label)
+        self.input_folder_select_label = QLabel("Selected Folder:")
+        input_folder_select_layout.addWidget(self.input_folder_select_label)
 
-        self.folder_path = QLineEdit()
-        self.folder_path.setReadOnly(True)
-        self.folder_path.setPlaceholderText("No folder selected")
-        folder_select_layout.addWidget(self.folder_path)
+        self.input_folder_path = QLineEdit()
+        self.input_folder_path.setReadOnly(True)
+        self.input_folder_path.setPlaceholderText("No folder selected")
+        input_folder_select_layout.addWidget(self.input_folder_path)
 
-        self.select_button = QPushButton("Select Folder")
-        self.select_button.clicked.connect(self.select_folder)
-        folder_select_layout.addWidget(self.select_button)
+        self.input_select_button = QPushButton("Select Folder")
+        self.input_select_button.clicked.connect(self.select_folder)
+        input_folder_select_layout.addWidget(self.input_select_button)
 
-        main_layout.addLayout(folder_select_layout)
+        main_layout.addLayout(input_folder_select_layout)
 
 
         # Run button
@@ -59,19 +59,19 @@ class AppWindow(QMainWindow):
         folder = QFileDialog.getExistingDirectory(self, "Select MP4 Folder")
 
         if folder:
-            self.folder_path.setText(folder)
+            self.input_folder_path.setText(folder)
             self.status_label.setText("Ready to merge.")
             self.run_button.setEnabled(True)
         else:
             self.status_label.setText("Folder selection cancelled.")
 
-            if not self.folder_path.text():
+            if not self.input_folder_path.text():
                 self.run_button.setEnabled(False) 
 
 
     def run_merge(self):
         self.run_button.setEnabled(False) 
-        folder = self.folder_path.text()
+        folder = self.input_folder_path.text()
 
         if not folder:
             self.status_label.setText("No folder selected.")
