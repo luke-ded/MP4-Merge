@@ -49,8 +49,19 @@ class AppWindow(QMainWindow):
         # Push elements to top
         main_layout.addStretch()
 
+
     def select_folder(self):
-        print("placeholder")
+        folder = QFileDialog.getExistingDirectory(self, "Select MP4 Folder")
+
+        if folder:
+            self.folder_path.setText(folder)
+            self.status_label.setText("Ready to merge.")
+            self.run_button.setEnabled(True)
+        else:
+            self.status_label.setText("Folder selection cancelled.")
+            
+            if not self.folder_path_input.text():
+                self.run_button.setEnabled(False) 
 
     def run_merge(self):
         print("placeholder")
