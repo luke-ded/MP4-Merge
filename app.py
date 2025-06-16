@@ -23,7 +23,7 @@ class AppWindow(QMainWindow):
         # Input Folder selection
         input_folder_select_layout = QHBoxLayout()
 
-        self.input_folder_select_label = QLabel("Selected Folder:")
+        self.input_folder_select_label = QLabel("Input Folder:")
         input_folder_select_layout.addWidget(self.input_folder_select_label)
 
         self.input_folder_path = QLineEdit()
@@ -36,6 +36,24 @@ class AppWindow(QMainWindow):
         input_folder_select_layout.addWidget(self.input_select_button)
 
         main_layout.addLayout(input_folder_select_layout)
+
+
+        # Output Folder selection
+        output_folder_select_layout = QHBoxLayout()
+
+        self.output_folder_select_label = QLabel("Output Folder:")
+        output_folder_select_layout.addWidget(self.output_folder_select_label)
+
+        self.output_folder_path = QLineEdit()
+        self.output_folder_path.setReadOnly(True)
+        self.output_folder_path.setPlaceholderText("No folder selected")
+        output_folder_select_layout.addWidget(self.output_folder_path)
+
+        self.output_select_button = QPushButton("Select Folder")
+        self.output_select_button.clicked.connect(self.select_folder)
+        output_folder_select_layout.addWidget(self.output_select_button)
+
+        main_layout.addLayout(output_folder_select_layout)
 
 
         # Run button
