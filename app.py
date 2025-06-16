@@ -9,7 +9,7 @@ class AppWindow(QMainWindow):
         super().__init__()
 
         self.setWindowTitle("MP4 Merge")
-        self.setGeometry(100, 100, 400, 400)
+        self.setGeometry(100, 100, 500, 200)
 
         central_widget = QWidget()
         self.setCentralWidget(central_widget)
@@ -35,9 +35,24 @@ class AppWindow(QMainWindow):
         main_layout.addLayout(folder_select_layout)
 
 
+        self.run_button = QPushButton("Merge Now")
+        self.run_button.setEnabled(False)
+        self.select_button.clicked.connect(self.run_merge)
+
+        main_layout.addWidget(self.run_button)
+
+
+        self.status_label = QLabel("Ready. Select a folder to begin.")
+        self.status_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        main_layout.addWidget(self.status_label)
+
+        # Push elements to top
         main_layout.addStretch()
 
     def select_folder(self):
+        print("placeholder")
+
+    def run_merge(self):
         print("placeholder")
         
 
