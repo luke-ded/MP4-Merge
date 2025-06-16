@@ -16,5 +16,16 @@ def merge(infolder, outfolder):
 
     print(filelist)
 
+    # Create temporary text file for ffmpeg
+    try:
+        with tempfile.NamedTemporaryFile(mode='w', delete=False, encoding='utf-8', suffix='.txt') as f:
+            list_file_path = f.name
+
+            for path in filelist:
+                f.write(f"file '{path}'\n")
+    except:
+        print("Error occured creating tempfile.")
+        return False, "Error occured creating tempfile."
+
 
     return True, "Success"
