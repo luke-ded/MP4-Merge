@@ -3,6 +3,8 @@ import sys, time
 from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import *
 
+from merge import merge
+
 
 class AppWindow(QMainWindow):
     def __init__(self):
@@ -77,6 +79,7 @@ class AppWindow(QMainWindow):
         self.status_label.setText("Merging in progress...")
 
         print("placeholder")
+        merge(folder)
 
         self.run_button.setEnabled(True)
         self.status_label.setText("Merge Complete. Check the selected folder for your output file.")
