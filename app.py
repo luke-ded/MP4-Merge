@@ -56,6 +56,16 @@ class AppWindow(QMainWindow):
         main_layout.addLayout(output_folder_select_layout)
 
 
+        # Push elements to top
+        main_layout.addStretch()
+
+
+        # Status message
+        self.status_label = QLabel("Ready. Select a folder to begin.")
+        self.status_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        main_layout.addWidget(self.status_label)
+        
+
         # Run button
         self.run_button = QPushButton("Merge Now")
         self.run_button.setEnabled(False)
