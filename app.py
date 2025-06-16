@@ -1,9 +1,9 @@
-import sys
+import sys, time
 
 from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import *
 
-# Subclass QMainWindow to customize your application's main window
+
 class AppWindow(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -35,13 +35,15 @@ class AppWindow(QMainWindow):
         main_layout.addLayout(folder_select_layout)
 
 
+        # Run button
         self.run_button = QPushButton("Merge Now")
         self.run_button.setEnabled(False)
-        self.select_button.clicked.connect(self.run_merge)
+        self.run_button.clicked.connect(self.run_merge)
 
         main_layout.addWidget(self.run_button)
 
 
+        # Status message
         self.status_label = QLabel("Ready. Select a folder to begin.")
         self.status_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         main_layout.addWidget(self.status_label)
@@ -59,16 +61,27 @@ class AppWindow(QMainWindow):
             self.run_button.setEnabled(True)
         else:
             self.status_label.setText("Folder selection cancelled.")
-            
-            if not self.folder_path_input.text():
+
+            if not self.folder_path.text():
                 self.run_button.setEnabled(False) 
 
+
     def run_merge(self):
-        print("placeholder")
+        self.run_button.setEnabled(False) 
+        folder = self.folder_path.text()
+
+        if not folder:
+            self.status_label.setText("No folder selected.")
+            return
         
+        self.status_label.setText("Merging in progress...")
 
+        print("placeholder")
 
+        self.run_button.setEnabled(True)
+        self.status_label.setText("Merge Complete. Check the selected folder for your output file.")
 
+        
         
 app = QApplication(sys.argv)
 window = AppWindow()
