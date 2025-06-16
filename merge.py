@@ -1,9 +1,20 @@
 import subprocess, os, tempfile
 
-def merge(infolder, outfolder):
+def merge(infolder, outfolder, outfile):
     
     if not infolder or not outfolder:
         return False, "Invalid video folder(s)"
+    
+
+    # Check for existing output file
+    outfile_path = os.path.join(outfolder, outfile)
+
+    if os.path.exists(outfile_path):
+        try:
+            os.remove(outfile_path)
+        except:
+            print("Could not delete existing output file.")
+            return False, "Could not delete existing output file. Delete it yourself or choose a different file name."
     
 
     # Get files in folder
@@ -17,7 +28,7 @@ def merge(infolder, outfolder):
     if len(filelist) < 2:
         return "Not enough files in the input folder."
     
-    
+
     # Create temporary text file for ffmpeg
     try:
         with tempfile.NamedTemporaryFile(mode='w', delete=False, encoding='utf-8', suffix='.txt') as f:
@@ -40,7 +51,7 @@ def merge(infolder, outfolder):
             '-i', list_file_path,
             '-c', 'copy',
             '-y', # Overwrite output file without asking
-            os.path.join(outfolder, "output.mp4")
+            outfile_path
         ]
 
         process = subprocess.run(command_list, capture_output=True, text=True, check=True, encoding='utf-8')
