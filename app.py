@@ -79,7 +79,7 @@ class AppWindow(QMainWindow):
         self.status_label.setText("Merging in progress...")
 
         print("placeholder")
-        merge(folder)
+        merge(folder, folder)
 
         self.run_button.setEnabled(True)
         self.status_label.setText("Merge Complete. Check the selected folder for your output file.")
