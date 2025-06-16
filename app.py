@@ -35,7 +35,7 @@ class AppWindow(QMainWindow):
         main_layout.addLayout(folder_select_layout)
 
 
-
+        main_layout.addStretch()
 
     def select_folder(self):
         print("placeholder")
