@@ -14,7 +14,10 @@ def merge(infolder, outfolder):
         if(os.path.isfile(os.path.join(infolder, file)) and file.lower().endswith(".mp4")):
             filelist.append(os.path.join(infolder, file))
 
-
+    if len(filelist) < 2:
+        return "Not enough files in the input folder."
+    
+    
     # Create temporary text file for ffmpeg
     try:
         with tempfile.NamedTemporaryFile(mode='w', delete=False, encoding='utf-8', suffix='.txt') as f:
