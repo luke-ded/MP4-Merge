@@ -78,7 +78,6 @@ class AppWindow(QMainWindow):
         
         self.status_label.setText("Merging in progress...")
 
-        print("placeholder")
         merge(folder, folder)
 
         self.run_button.setEnabled(True)
