@@ -171,10 +171,16 @@ class AppWindow(QMainWindow):
 
         outfile += ".mp4"
 
-        merge(infolder, outfolder, outfile)
+        output = merge(infolder, outfolder, outfile)
+
+        print(output[1])
 
         self.run_button.setEnabled(True)
-        self.status_label.setText("Merge Complete. Check the selected folder for your output file.")
+
+        if(output[0]):
+            self.status_label.setText("Merge complete. Check the selected folder for your output file.")
+        else:
+            self.status_label.setText("Merge failed. " + output[1])
 
         
         
