@@ -167,8 +167,11 @@ class AppWindow(QMainWindow):
         
 
         self.status_label.setText("Merging in progress...")
+        QApplication.processEvents()
 
-        merge(infolder, outfolder, outfile + ".mp4")
+        outfile += ".mp4"
+
+        merge(infolder, outfolder, outfile)
 
         self.run_button.setEnabled(True)
         self.status_label.setText("Merge Complete. Check the selected folder for your output file.")
