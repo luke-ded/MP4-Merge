@@ -56,6 +56,26 @@ class AppWindow(QMainWindow):
         main_layout.addLayout(output_folder_select_layout)
 
 
+        # Output File Name
+        output_file_name_layout = QHBoxLayout()
+
+        self.output_file_name_label = QLabel("Output File Name:")
+        output_file_name_layout.addWidget(self.output_file_name_label)
+
+        self.output_file_input = QLineEdit()
+        self.output_file_input.setPlaceholderText("No folder selected")
+        self.output_file_input.setFixedWidth(200)
+        output_file_name_layout.addWidget(self.output_file_input)
+
+        self.output_file_name_suffix_label = QLabel(".mp4")
+        output_file_name_layout.addWidget(self.output_file_name_suffix_label)
+
+        output_file_name_layout.addStretch(1)
+
+
+        main_layout.addLayout(output_file_name_layout)
+
+
         # Push elements to top
         main_layout.addStretch()
 
