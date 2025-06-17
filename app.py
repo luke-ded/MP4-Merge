@@ -64,8 +64,9 @@ class AppWindow(QMainWindow):
 
         self.output_file_input = QLineEdit()
         self.output_file_input.setPlaceholderText("filename")
-        self.output_file_input.setReadOnly(True)
-        #self.output_file_input.setFixedWidth(200)
+        self.output_file_input.setText("mp4_merged")
+        self.output_file_input.setDisabled(True)
+        self.output_file_input.textChanged.connect(self.handle_text_changed)
         output_file_name_layout.addWidget(self.output_file_input)
 
         self.output_file_name_suffix_label = QLabel(".mp4  ")
@@ -74,6 +75,7 @@ class AppWindow(QMainWindow):
 
         self.auto_checkbox = QCheckBox("Auto")
         self.auto_checkbox.setChecked(True)
+        self.auto_checkbox.stateChanged.connect(self.handle_checkbox)
         output_file_name_layout.addWidget(self.auto_checkbox)
 
         main_layout.addLayout(output_file_name_layout)
@@ -97,6 +99,26 @@ class AppWindow(QMainWindow):
         main_layout.addWidget(self.run_button)
 
 
+    def handle_checkbox(self, state):
+        # Checked
+        if(state == Qt.CheckState.Checked.value):
+            self.output_file_input.setText("mp4_merged")
+            self.output_file_input.setDisabled(True)
+
+        # Unchecked
+        else:
+            self.output_file_input.setPlaceholderText("filename")
+            self.output_file_input.setText("")
+            self.output_file_input.setDisabled(False)
+
+
+    def handle_text_changed(self, text):
+        if(text and self.output_folder_path.text() and self.input_folder_path.text()):
+            self.run_button.setEnabled(True) 
+        else:
+            self.run_button.setEnabled(False) 
+
+
     def select_infolder(self):
         infolder = QFileDialog.getExistingDirectory(self, "Select MP4 Folder")
 
@@ -104,12 +126,12 @@ class AppWindow(QMainWindow):
             self.input_folder_path.setText(infolder)
             self.status_label.setText("Ready to merge.")
 
-            if self.output_folder_path.text():
+            if self.output_folder_path.text() and self.output_file_input.text():
                 self.run_button.setEnabled(True)
         else:
             self.status_label.setText("Folder selection cancelled.")
 
-            if not self.input_folder_path.text() or not self.output_folder_path.text():
+            if not self.input_folder_path.text() or not self.output_folder_path.text() or not self.output_file_input.text():
                 self.run_button.setEnabled(False) 
 
 
@@ -120,12 +142,12 @@ class AppWindow(QMainWindow):
             self.output_folder_path.setText(outfolder)
             self.status_label.setText("Ready to merge.")
 
-            if self.input_folder_path.text():
+            if self.input_folder_path.text() and self.output_file_input.text():
                 self.run_button.setEnabled(True)
         else:
             self.status_label.setText("Folder selection cancelled.")
 
-            if not self.output_folder_path.text() or not self.input_folder_path.text():
+            if not self.output_folder_path.text() or not self.input_folder_path.text() or not self.output_file_input.text():
                 self.run_button.setEnabled(False) 
 
 
@@ -133,14 +155,20 @@ class AppWindow(QMainWindow):
         self.run_button.setEnabled(False) 
         infolder = self.input_folder_path.text()
         outfolder = self.output_folder_path.text()
+        outfile = self.output_file_input.text()
 
         if not infolder or not outfolder:
             self.status_label.setText("No folder selected.")
             return
         
+        if not outfile:
+            self.status_label.setText("Enter an output file name or set to auto.")
+            return
+        
+
         self.status_label.setText("Merging in progress...")
 
-        merge(infolder, outfolder, "output.mp4")
+        merge(infolder, outfolder, outfile + ".mp4")
 
         self.run_button.setEnabled(True)
         self.status_label.setText("Merge Complete. Check the selected folder for your output file.")
