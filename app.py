@@ -32,7 +32,7 @@ class AppWindow(QMainWindow):
         input_folder_select_layout.addWidget(self.input_folder_path)
 
         self.input_select_button = QPushButton("Select Folder")
-        self.input_select_button.clicked.connect(self.select_folder)
+        self.input_select_button.clicked.connect(self.select_infolder)
         input_folder_select_layout.addWidget(self.input_select_button)
 
         main_layout.addLayout(input_folder_select_layout)
@@ -50,7 +50,7 @@ class AppWindow(QMainWindow):
         output_folder_select_layout.addWidget(self.output_folder_path)
 
         self.output_select_button = QPushButton("Select Folder")
-        self.output_select_button.clicked.connect(self.select_folder)
+        self.output_select_button.clicked.connect(self.select_outfolder)
         output_folder_select_layout.addWidget(self.output_select_button)
 
         main_layout.addLayout(output_folder_select_layout)
@@ -74,40 +74,50 @@ class AppWindow(QMainWindow):
         main_layout.addWidget(self.run_button)
 
 
-        # Status message
-        self.status_label = QLabel("Ready. Select a folder to begin.")
-        self.status_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        main_layout.addWidget(self.status_label)
+    def select_infolder(self):
+        infolder = QFileDialog.getExistingDirectory(self, "Select MP4 Folder")
 
-        # Push elements to top
-        main_layout.addStretch()
-
-
-    def select_folder(self):
-        folder = QFileDialog.getExistingDirectory(self, "Select MP4 Folder")
-
-        if folder:
-            self.input_folder_path.setText(folder)
+        if infolder:
+            self.input_folder_path.setText(infolder)
             self.status_label.setText("Ready to merge.")
-            self.run_button.setEnabled(True)
+
+            if self.output_folder_path.text():
+                self.run_button.setEnabled(True)
         else:
             self.status_label.setText("Folder selection cancelled.")
 
-            if not self.input_folder_path.text():
+            if not self.input_folder_path.text() or not self.output_folder_path.text():
+                self.run_button.setEnabled(False) 
+
+
+    def select_outfolder(self):
+        outfolder = QFileDialog.getExistingDirectory(self, "Select MP4 Folder")
+
+        if outfolder:
+            self.output_folder_path.setText(outfolder)
+            self.status_label.setText("Ready to merge.")
+
+            if self.input_folder_path.text():
+                self.run_button.setEnabled(True)
+        else:
+            self.status_label.setText("Folder selection cancelled.")
+
+            if not self.output_folder_path.text() or not self.input_folder_path.text():
                 self.run_button.setEnabled(False) 
 
 
     def run_merge(self):
         self.run_button.setEnabled(False) 
-        folder = self.input_folder_path.text()
+        infolder = self.input_folder_path.text()
+        outfolder = self.output_folder_path.text()
 
-        if not folder:
+        if not infolder or not outfolder:
             self.status_label.setText("No folder selected.")
             return
         
         self.status_label.setText("Merging in progress...")
 
-        merge(folder, folder, "output.mp4")
+        merge(infolder, outfolder, "output.mp4")
 
         self.run_button.setEnabled(True)
         self.status_label.setText("Merge Complete. Check the selected folder for your output file.")
