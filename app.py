@@ -63,15 +63,18 @@ class AppWindow(QMainWindow):
         output_file_name_layout.addWidget(self.output_file_name_label)
 
         self.output_file_input = QLineEdit()
-        self.output_file_input.setPlaceholderText("No folder selected")
-        self.output_file_input.setFixedWidth(200)
+        self.output_file_input.setPlaceholderText("filename")
+        self.output_file_input.setReadOnly(True)
+        #self.output_file_input.setFixedWidth(200)
         output_file_name_layout.addWidget(self.output_file_input)
 
-        self.output_file_name_suffix_label = QLabel(".mp4")
+        self.output_file_name_suffix_label = QLabel(".mp4  ")
         output_file_name_layout.addWidget(self.output_file_name_suffix_label)
 
-        output_file_name_layout.addStretch(1)
 
+        self.auto_checkbox = QCheckBox("Auto")
+        self.auto_checkbox.setChecked(True)
+        output_file_name_layout.addWidget(self.auto_checkbox)
 
         main_layout.addLayout(output_file_name_layout)
 
