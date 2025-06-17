@@ -2,6 +2,7 @@ import sys, time
 
 from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import *
+from PyQt6.QtGui import QIcon
 
 from merge import merge
 
@@ -13,6 +14,7 @@ class AppWindow(QMainWindow):
         self.setWindowTitle("MP4 Merge")
         self.setGeometry(100, 100, 500, 200)
         self.setStyleSheet("background-color: #e0e0e0;")
+        self.setWindowIcon(QIcon('./icon.ico'))
 
         central_widget = QWidget()
         self.setCentralWidget(central_widget)
