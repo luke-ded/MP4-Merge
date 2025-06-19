@@ -189,4 +189,9 @@ class AppWindow(QMainWindow):
 app = QApplication(sys.argv)
 window = AppWindow()
 window.show()
+
+with open("style.qss", "r") as f:
+    _style = f.read()
+    app.setStyleSheet(_style)
+
 app.exec()
