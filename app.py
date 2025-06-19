@@ -13,7 +13,8 @@ class AppWindow(QMainWindow):
 
         self.setWindowTitle("MP4 Merge")
         self.setGeometry(100, 100, 500, 200)
-        self.setStyleSheet("background-color: #e0e0e0;")
+        self.setObjectName("mainWindow")
+        #self.setStyleSheet("background-color: #e0e0e0;")
         self.setWindowIcon(QIcon('./icon.ico'))
 
         central_widget = QWidget()

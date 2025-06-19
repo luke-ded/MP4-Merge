@@ -1,0 +1,26 @@
+QLabel 
+{
+    qproperty-alignment: AlignCenter;
+    font-weight:600;
+}
+
+QPushButton 
+{
+    background-color: #83b2e7;
+    font-weight:550;
+}
+
+QPushButton:hover
+{
+    background-color: #365c94;
+}
+
+QPushButton:disabled
+{
+    background-color:rgb(181, 203, 235)
+}
+
+QWidget#mainWindow
+{
+    background-color: #e1e4e8
+}
