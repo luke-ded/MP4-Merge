@@ -1,4 +1,4 @@
-import sys, time
+import os, sys, time
 
 from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import *
@@ -190,8 +190,24 @@ app = QApplication(sys.argv)
 window = AppWindow()
 window.show()
 
-with open("style.qss", "r") as f:
-    _style = f.read()
-    app.setStyleSheet(_style)
+
+# Pyinstaller stylesheet include
+if getattr(sys, 'frozen', False):
+    resource_base_path = sys._MEIPASS
+else:
+    resource_base_path = os.path.dirname(os.path.abspath(__file__))
+
+qss_file_path = os.path.join(resource_base_path, "style.qss")
+
+
+# Import stylesheet
+try:
+    with open(qss_file_path, "r") as f:
+        _style = f.read()
+        app.setStyleSheet(_style)
+except FileNotFoundError:
+    print(f"Error: styles.qss file not found at {qss_file_path}. Application may display incorrectly.")
+except Exception as e:
+    print(f"Error loading styles.qss: {e}")
 
 app.exec()

@@ -1,10 +1,23 @@
-import subprocess, os, tempfile
+import subprocess, os, tempfile, sys
 
 def merge(infolder, outfolder, outfile):
     
     if not infolder or not outfolder:
         return False, "Invalid video folder(s)"
     
+
+    # Pyinstaller code
+    if getattr(sys, 'frozen', False):
+        base_path = sys._MEIPASS
+    else:
+        base_path = ''
+
+    ffmpeg_exe_name = 'ffmpeg'
+    if sys.platform == "win32":
+        ffmpeg_exe_name = 'ffmpeg.exe'
+    
+    ffmpeg_path = os.path.join(base_path, ffmpeg_exe_name)
+
 
     # Check for existing output file
     outfile_path = os.path.join(outfolder, outfile)
@@ -50,7 +63,7 @@ def merge(infolder, outfolder, outfile):
             '-safe', '0',
             '-i', list_file_path,
             '-c', 'copy',
-            '-y', # Overwrite output file without asking
+            '-y',
             outfile_path
         ]
 
