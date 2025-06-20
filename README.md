@@ -14,7 +14,7 @@ Ffmpeg is very senstive to differing properties in video streams. Also, **videos
 metadata result videos will cause corrupted video if merged again.
 
 ## The Code
-This is a python wrapper for ffmpeg utilizing PyQt6 for the graphical user interface. Executable files were created for Windows, MacOS, and Linux using PyInstaller.
+This is a wrapper for ffmpeg coded in Python and utilizing PyQt6 for the graphical user interface. Executable files were created for Windows, MacOS, and Linux using PyInstaller.
 
 ## About
 This program was created by Luke, a CS major at University of Central Florida.
