@@ -1,12 +1,19 @@
 QLabel 
 {
+    color: black;
     qproperty-alignment: AlignCenter;
     font-weight:600;
+}
+
+QLineEdit
+{
+    background-color: white;
 }
 
 QPushButton 
 {
     background-color: #83b2e7;
+    color: black;
     font-weight:550;
 }
 
@@ -17,10 +24,11 @@ QPushButton:hover
 
 QPushButton:disabled
 {
-    background-color:rgb(181, 203, 235)
+    background-color:rgb(181, 203, 235);
+    color: gray;
 }
 
 QWidget#mainWindow
 {
-    background-color: #e1e4e8
+    background-color: #e1e4e8;
 }
