@@ -1,5 +1,5 @@
 # MP4 Merge
-This application merges/concatenates a folder full of MP4 files into one singular mp4 file. This app is meant to be used on a folder of videos from a dashcam. This application has versions for Windows, MacOS, and Linux.
+This application merges/concatenates a folder full of MP4 files into one singular mp4 file. This app is intended to be used on a folder of videos from a dashcam, but may also be used in other applications where the videos' sources are identical. This application has versions for Windows, MacOS, and Linux.
 
 ![Application Screenshot](images/app.png)
 
