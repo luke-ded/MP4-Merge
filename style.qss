@@ -19,13 +19,16 @@ QCheckBox
 QPushButton 
 {
     background-color: #83b2e7;
+    border: 1px solid rgb(74, 146, 228);
+    border-radius: 4px;
+    padding: 2px;
     color: black;
     font-weight:550;
 }
 
 QPushButton:hover
 {
-    background-color: #365c94;
+    background-color:rgb(91, 154, 227);
 }
 
 QPushButton:disabled
