@@ -8,6 +8,12 @@ QLabel
 QLineEdit
 {
     background-color: white;
+    color: black;
+}
+
+QCheckBox
+{
+    color: black;
 }
 
 QPushButton 
